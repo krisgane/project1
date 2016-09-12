@@ -1,6 +1,7 @@
 package rentbazaar.wyby;
 
 /**
+ * Basic MiniListing information.
  * Created by krisgane on 9/11/16.
  */
 public class MiniListingData {
@@ -12,12 +13,12 @@ public class MiniListingData {
     MiniListingData(
             Integer drawableId,
             String shortDescription,
-            Double distance,
-            Double rent) {
+            Double rent,
+            Double distance) {
         this.drawableId = drawableId;
         this.shortDescription = shortDescription;
-        this.distance = distance;
         this.rent = rent;
+        this.distance = distance;
     }
 
     public Double getDistance() {

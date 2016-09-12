@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
         ArrayList<MiniListingData> miniListings = provider.getData();
 
         // (TODO): Remove some buffer for safety.
-        int screenWidth = metrics.widthPixels - 100;
+        int screenWidth = metrics.widthPixels - 30;
         int scaledWidth = screenWidth / 2;
         BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
         bmpOptions.inTargetDensity = DisplayMetrics.DENSITY_DEFAULT;
