@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import java.util.Locale;
 public class MiniListingViewBuilder {
     private static final Integer LAYOUT_ID_OFFSET = 1000;
     private static final Integer IMG_ID_OFFSET = 10000;
+    private static final Integer RENT_IMG_ID_OFFSET = 20000;
     private static final Integer RENT_ID_OFFSET = 100000;
     private static final Integer DISTANCE_ID_OFFSET = 200000;
     private static final Integer SD_ID_OFFSET = 300000;
@@ -98,51 +100,57 @@ public class MiniListingViewBuilder {
 
         int imageViewId = IMG_ID_OFFSET + resourceId;
         ImageView imageView = new ImageView(parentContext);
-        imageView.setLayoutParams(new RelativeLayout.LayoutParams(width, height - 50));
+        RelativeLayout.LayoutParams imageLayoutParams =
+                new RelativeLayout.LayoutParams(500, 400);
+        imageLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        imageView.setLayoutParams(imageLayoutParams);
         imageView.setId(imageViewId);
         imageView.setImageResource(drawableId);
+        imageView.setPadding(0,0,0,50);
         relativeLayout.addView(imageView);
+
+        int rentImageViewId = RENT_IMG_ID_OFFSET + resourceId;
+        ImageView rentImageView = new ImageView(parentContext);
+        rentImageView.setImageResource(R.drawable.r023);
+        RelativeLayout.LayoutParams rentLayoutParams =
+                new RelativeLayout.LayoutParams(100, 100);
+        rentLayoutParams.addRule(RelativeLayout.ALIGN_RIGHT, imageViewId);
+        rentLayoutParams.addRule(RelativeLayout.ALIGN_TOP, imageViewId);
+        rentImageView.setLayoutParams(rentLayoutParams);
+        rentImageView.setId(rentImageViewId);
+        relativeLayout.addView(rentImageView);
 
         // TODO : Fixed all textbox heights to 50px for now.
         TextView rentView = new TextView(parentContext);
-        RelativeLayout.LayoutParams rentLayoutParams =
-                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, 50);
-        rentLayoutParams.addRule(RelativeLayout.ALIGN_RIGHT, imageViewId);
-        rentLayoutParams.addRule(RelativeLayout.ALIGN_TOP, imageViewId);
-        rentView.setLayoutParams(rentLayoutParams);
+        RelativeLayout.LayoutParams rentTextLayoutParams =
+                new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+        rentTextLayoutParams.addRule(RelativeLayout.ALIGN_RIGHT, imageViewId);
+        rentTextLayoutParams.addRule(RelativeLayout.ALIGN_BOTTOM, rentImageViewId);
+        rentView.setLayoutParams(rentTextLayoutParams);
         // TODO : Extend this for other countries.  Defaulting to UK for now.
         rentView.setText(
                 String.format(res.getString(R.string.rent_message), rent, currencySymbol));
+        rentView.setTextColor(res.getColor(R.color.colorWhite));
         rentView.setId(RENT_ID_OFFSET + resourceId);
         // R.color.holo_green_light
-        rentView.setBackgroundResource(ColorSet.MINI_LISTING_RENT_BG_COLOR);
         relativeLayout.addView(rentView);
-
-        TextView distanceView = new TextView(parentContext);
-        RelativeLayout.LayoutParams distanceLayoutParams =
-                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, 50);
-        distanceLayoutParams.addRule(RelativeLayout.ALIGN_LEFT, imageViewId);
-        distanceLayoutParams.addRule(RelativeLayout.ALIGN_TOP, imageViewId);
-        distanceView.setLayoutParams(distanceLayoutParams);
-        distanceView.setText(
-                String.format(res.getString(R.string.distance_message), distance));
-        distanceView.setId(DISTANCE_ID_OFFSET + resourceId);
-        // R.color.holo_red_light
-        distanceView.setBackgroundResource(ColorSet.MINI_LISTING_DISTANCE_BG_COLOR);
-        relativeLayout.addView(distanceView);
 
         // TODO : Add long description as well if needed.
         TextView shortDescriptionView = new TextView(parentContext);
         RelativeLayout.LayoutParams descriptionLayoutParams =
-                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 50);
+                new RelativeLayout.LayoutParams(405, 70);
         descriptionLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        descriptionLayoutParams.addRule(RelativeLayout.BELOW, imageViewId);
+        descriptionLayoutParams.addRule(RelativeLayout.ALIGN_BOTTOM, imageViewId);
+        descriptionLayoutParams.addRule(RelativeLayout.ALIGN_RIGHT, imageViewId);
         shortDescriptionView.setLayoutParams(descriptionLayoutParams);
         shortDescriptionView.setId(SD_ID_OFFSET + resourceId);
         shortDescriptionView.setText(shortDescription);
         shortDescriptionView.setTextColor(res.getColor(R.color.colorBlack));
+        shortDescriptionView.setBackgroundResource(R.color.colorWhite);
         shortDescriptionView.setGravity(Gravity.CENTER);
         relativeLayout.addView(shortDescriptionView);
+        relativeLayout.setPadding(0,0,0,30);
         return relativeLayout;
     }
 }

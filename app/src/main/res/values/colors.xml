@@ -10,4 +10,6 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorOrange">#ECC363</color>
     <color name="colorMidnightBlue">#191970</color>
+    <color name="orangeBgColor">#F3840F</color>
+    <color name="borderColor">#DC6D0C</color>
 </resources>

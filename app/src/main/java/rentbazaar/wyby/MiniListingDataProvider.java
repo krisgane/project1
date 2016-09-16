@@ -17,11 +17,15 @@ public class MiniListingDataProvider {
         miniListings.add(
                 new MiniListingData(R.drawable.potter_book, "Harry Potter Latest", 1.0, 0.4));
         miniListings.add(
-                new MiniListingData(R.drawable.printer_3d, "Awesome 3D Printer", 1.0, 0.4));
-        miniListings.add(
                 new MiniListingData(R.drawable.car_seat, "Baby Car Seat", 2.5, 0.2));
         miniListings.add(
                 new MiniListingData(R.drawable.suedette_shoe, "Suedette Shoe", 1.0, 0.6));
+        miniListings.add(
+                new MiniListingData(R.drawable.outdoor, "Camping Equipment", 5.0, 0.6));
+        miniListings.add(
+                new MiniListingData(R.drawable.printer_3d, "3D Printer Cool", 5.0, 0.6));
+        miniListings.add(
+                new MiniListingData(R.drawable.bbq, "Bbq Charcoal", 5.0, 0.6));
         return miniListings;
     }
 }
